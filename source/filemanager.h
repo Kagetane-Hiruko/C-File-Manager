@@ -1,20 +1,27 @@
-#ifdef _WIN32
+#ifndef KAGETANE_HIRUKO_FILE_MANAGER
+#define KAGETANE_HIRUKO_FILE_MANAGER
 
-	#ifdef BUILD_MODE
+#ifndef KAGETANE_HIRUKO_API
 
-		#define KAGETANE_HIRUKO_API __declspec(dllexport)
+	#ifdef _WIN32
 
-	#else
+		#ifdef BUILD_MODE
 
-		#define KAGETANE_HIRUKO_API __declspec(dllimport)
+			#define KAGETANE_HIRUKO_API __declspec(dllexport)
+
+		#else
+
+			#define KAGETANE_HIRUKO_API __declspec(dllimport)
+
+		#endif
 
 	#endif
 
+	// #define KAGETANE_HIRUKO_API
+	#define DREF(pointer) (*pointer)
+ 
 #endif
 
-// #define KAGETANE_HIRUKO_API
-#define DREF(pointer) (*pointer)
- 
 typedef struct
 {
 	/**
@@ -109,3 +116,5 @@ extern "C" void   KAGETANE_HIRUKO_API set_file_stream_position(file_t * file, un
 
 **/
 extern "C" void   KAGETANE_HIRUKO_API buffer_read_file(char * buffer, unsigned int size, file_t * file);
+
+#endif
