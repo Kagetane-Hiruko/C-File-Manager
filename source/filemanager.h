@@ -12,7 +12,47 @@
 
 #endif
 
-#define dref(pointer) (*pointer)
+// #define KAGETANE_HIRUKO_API
+#define DREF(pointer) (*pointer)
+ 
+typedef struct
+{
+	/**
+
+		Variable: file_path
+		Holds absoulte or relative file path.
+
+	**/
+	const char * file_path;
+
+	/**
+
+		Variable: file_stream
+		Holds the opened file stream.
+
+	**/
+	void * file_stream;
+	/** 
+	
+		Variable: size
+		Holds size of file in bytes.
+
+	**/
+	unsigned int size;;
+
+} file_t;
+
+
+/**
+
+	Function: create_manager_for_file
+	Return type: file_t *
+	Params: const char *
+
+	This function is used for creating file manger through which we will write and read.
+
+**/
+extern "C" file_t * KAGETANE_HIRUKO_API create_file_manager(const char * file_path, const char * mode);
 
 /**
 
@@ -23,7 +63,7 @@
 	This function is used for writing text to file.
 
 **/
-extern "C" void KAGETANE_HIRUKO_API write_to_file(const char * file, const char * text, const char * mode);
+extern "C" void KAGETANE_HIRUKO_API write_to_file(file_t * file, const char * text);
 
 /**
 
@@ -34,4 +74,38 @@ extern "C" void KAGETANE_HIRUKO_API write_to_file(const char * file, const char 
 	This function will read text from file and return it.
 
 **/
-extern "C" char * KAGETANE_HIRUKO_API read_from_file(const char * file);
+extern "C" char * KAGETANE_HIRUKO_API read_from_file(file_t * file);
+
+/**
+
+	Function: close_file_manager
+	Return types: void
+	Params: file_t *
+
+	This function is used for closing file streams.
+
+**/
+extern "C" void   KAGETANE_HIRUKO_API close_file_manager(file_t * file);
+
+/**
+
+	Function: set_file_stream_position
+	Return type: void
+	Params: file_t *, unsigned int
+
+	This functions is used to se position of file stream.
+
+**/
+extern "C" void   KAGETANE_HIRUKO_API set_file_stream_position(file_t * file, unsigned int position);
+
+/**
+
+	Function: buffer_read_file
+	Return type: void
+	Params: char *, unsigned int, file_t *
+
+	This functions is used for reading blocks of file.
+
+
+**/
+extern "C" void   KAGETANE_HIRUKO_API buffer_read_file(char * buffer, unsigned int size, file_t * file);
