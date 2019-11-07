@@ -3,6 +3,16 @@
 
 #ifndef KAGETANE_HIRUKO_API
 
+	#ifdef __cplusplus
+		
+		#define EXTERN_C extern "C"
+	
+	#else
+
+		#define EXTERN_C
+
+	#endif
+
 	#ifdef _WIN32
 
 		#ifdef BUILD_MODE
@@ -59,7 +69,7 @@ typedef struct
 	This function is used for creating file manger through which we will write and read.
 
 **/
-extern "C" file_t * KAGETANE_HIRUKO_API create_file_manager(const char * file_path, const char * mode);
+EXTERN_C file_t * KAGETANE_HIRUKO_API create_file_manager(const char * file_path, const char * mode);
 
 /**
 
@@ -70,7 +80,7 @@ extern "C" file_t * KAGETANE_HIRUKO_API create_file_manager(const char * file_pa
 	This function is used for writing text to file.
 
 **/
-extern "C" void KAGETANE_HIRUKO_API write_to_file(file_t * file, const char * text);
+EXTERN_C void KAGETANE_HIRUKO_API write_to_file(file_t * file, const char * text);
 
 /**
 
@@ -81,7 +91,7 @@ extern "C" void KAGETANE_HIRUKO_API write_to_file(file_t * file, const char * te
 	This function will read text from file and return it.
 
 **/
-extern "C" char * KAGETANE_HIRUKO_API read_from_file(file_t * file);
+EXTERN_C char * KAGETANE_HIRUKO_API read_from_file(file_t * file);
 
 /**
 
@@ -92,7 +102,7 @@ extern "C" char * KAGETANE_HIRUKO_API read_from_file(file_t * file);
 	This function is used for closing file streams.
 
 **/
-extern "C" void   KAGETANE_HIRUKO_API close_file_manager(file_t * file);
+EXTERN_C void   KAGETANE_HIRUKO_API close_file_manager(file_t * file);
 
 /**
 
@@ -103,7 +113,7 @@ extern "C" void   KAGETANE_HIRUKO_API close_file_manager(file_t * file);
 	This functions is used to se position of file stream.
 
 **/
-extern "C" void   KAGETANE_HIRUKO_API set_file_stream_position(file_t * file, unsigned int position);
+EXTERN_C void   KAGETANE_HIRUKO_API set_file_stream_position(file_t * file, unsigned int position);
 
 /**
 
@@ -115,6 +125,6 @@ extern "C" void   KAGETANE_HIRUKO_API set_file_stream_position(file_t * file, un
 
 
 **/
-extern "C" void   KAGETANE_HIRUKO_API buffer_read_file(char * buffer, unsigned int size, file_t * file);
+EXTERN_C void   KAGETANE_HIRUKO_API buffer_read_file(char * buffer, unsigned int size, file_t * file);
 
 #endif
